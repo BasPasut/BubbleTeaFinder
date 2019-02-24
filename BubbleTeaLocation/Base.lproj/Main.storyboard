@@ -1,24 +1,113 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" systemVersion="17A277" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Ejw-ie-U7i">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="8sS-9X-YFN">
+            <objects>
+                <navigationController id="Ejw-ie-U7i" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="03U-Q8-iYZ">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="1ip-gt-3GJ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b9Z-TM-ozP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-689" y="36"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="BubbleTeaLocation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3zS-JD-FPO" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cbf-Gh-XT0">
+                                <rect key="frame" x="8" y="72" width="110" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Find Bubble Tea"/>
+                                <connections>
+                                    <action selector="findAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Oz4-TN-Knt"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="3zS-JD-FPO" secondAttribute="bottom" id="NHa-xP-4TU"/>
+                            <constraint firstItem="cbf-Gh-XT0" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="UQV-u5-N3d"/>
+                            <constraint firstItem="cbf-Gh-XT0" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="WL5-JI-zgd"/>
+                            <constraint firstItem="3zS-JD-FPO" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="lKZ-JB-Uyu"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="cbf-Gh-XT0" secondAttribute="trailing" constant="20" symbolic="YES" id="nns-GA-zdS"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="3zS-JD-FPO" secondAttribute="trailing" id="pcD-ls-8OG"/>
+                            <constraint firstItem="3zS-JD-FPO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="zbt-jv-C6c"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" id="Zcb-zH-XN0"/>
+                    <connections>
+                        <outlet property="mapView" destination="3zS-JD-FPO" id="tyJ-Ou-2iX"/>
+                        <segue destination="DoX-E8-nUl" kind="show" identifier="showDetails" id="ScQ-ez-x95"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="486" y="37"/>
+        </scene>
+        <!--Venue Detail Controller-->
+        <scene sceneID="ikA-TA-p8t">
+            <objects>
+                <viewController id="DoX-E8-nUl" customClass="VenueDetailController" customModule="BubbleTeaLocation" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jBX-QA-zmh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="209-un-1hX">
+                                <rect key="frame" x="0.0" y="64" width="375" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="209-un-1hX" secondAttribute="height" multiplier="15:8" id="LJv-GR-WWw"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Awj-pu-LGT">
+                                <rect key="frame" x="16" y="284" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="e59-nd-f02" firstAttribute="trailing" secondItem="209-un-1hX" secondAttribute="trailing" id="3rN-h8-IHh"/>
+                            <constraint firstItem="Awj-pu-LGT" firstAttribute="top" secondItem="209-un-1hX" secondAttribute="bottom" constant="20" id="9uy-I8-hAx"/>
+                            <constraint firstItem="Awj-pu-LGT" firstAttribute="leading" secondItem="e59-nd-f02" secondAttribute="leading" constant="16" id="WNQ-b2-aQv"/>
+                            <constraint firstItem="209-un-1hX" firstAttribute="leading" secondItem="e59-nd-f02" secondAttribute="leading" id="oTB-nB-TEk"/>
+                            <constraint firstItem="209-un-1hX" firstAttribute="top" secondItem="e59-nd-f02" secondAttribute="top" id="zU8-PE-kLo"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="e59-nd-f02"/>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="209-un-1hX" id="uVM-pl-WJA"/>
+                        <outlet property="textLabel" destination="Awj-pu-LGT" id="pDc-VH-z48"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Po8-vW-zGe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1485" y="34"/>
         </scene>
     </scenes>
 </document>
